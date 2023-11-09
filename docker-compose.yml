@@ -13,7 +13,7 @@ services:
       - dhparam:/etc/nginx/dhparam
       - certs:/etc/nginx/certs:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /usr/share/nginx/html
+      - html:/usr/share/nginx/html
     networks:
       - nginx-proxy
     restart: always
@@ -21,11 +21,14 @@ services:
   letsencrypt:
     image: nginxproxy/acme-companion
     container_name: nginx-proxy-le
+    environment:
+      NGINX_PROXY_CONTAINER: nginx-proxy
     volumes:
       - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d
       - dhparam:/etc/nginx/dhparam
-      - /usr/share/nginx/html
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
       - certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: always
@@ -35,6 +38,8 @@ volumes:
   vhost:
   dhparam:
   certs:
+  html:
+  acme:
 
 networks:
   nginx-proxy:
