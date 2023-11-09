@@ -15,7 +15,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - /usr/share/nginx/html
     networks:
-      - proxy
+      - nginx-proxy
     restart: always
 
   letsencrypt:
@@ -37,6 +37,5 @@ volumes:
   certs:
 
 networks:
-  proxy:
-    name: proxy
+  nginx-proxy:
     external: true
