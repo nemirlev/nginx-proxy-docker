@@ -40,9 +40,9 @@ services:
         - proxy
 
 networks:
-    proxy:
-        external:
-          name: proxy
+  proxy:
+    name: proxy
+    external: true
 ```
 
 

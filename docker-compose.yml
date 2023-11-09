@@ -38,5 +38,5 @@ volumes:
 
 networks:
   proxy:
-    external:
-      name: nginx-proxy
+    name: proxy
+    external: true
