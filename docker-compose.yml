@@ -22,7 +22,10 @@ services:
     image: nginxproxy/acme-companion
     container_name: nginx-proxy-le
     volumes:
-      - nginx-proxy
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - dhparam:/etc/nginx/dhparam
+      - /usr/share/nginx/html
       - certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: always
