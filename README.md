@@ -1,28 +1,28 @@
-# Простой Nginx прокси в Docker с SSL
+# Simple Nginx Proxy in Docker with SSL
 
-## Предварительные требования
+## Prerequisites
 
 - [Docker](https://docs.docker.com/engine/installation/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Установка
+## Installation
 
-1. Склонируйте репозиторий
-2. Перейдите в папку с проектом
-3. Создайте сеть для прокси `docker network create proxy`
-4. Запустите `docker-compose up -d`
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Create a network for the proxy: `docker network create proxy`
+4. Start the proxy `docker-compose up -d`
 
-Для того что бы ваше приложение (или веб-сервер) работал, требуется указать дополнительные переменны:
+To make your application (or web server) work with the proxy, you need to specify the following environment variables:
 
-- `VIRTUAL_HOST` - доменное имя вашего приложения
-- `VIRTUAL_PORT` - порт вашего приложения, указывается в случае если он отличается от 80
-- `LETSENCRYPT_HOST` - доменное имя вашего приложения
-- `LETSENCRYPT_EMAIL` - ваш email
-- `LETSENCRYPT_TEST` - если установить значение `true`, то сертификат будет выдан для тестового домена
+- `VIRTUAL_HOST` - The domain name of your application.
+- `VIRTUAL_PORT` - The port of your application (if it differs from 80).
+- `LETSENCRYPT_HOST` - The domain name of your application.
+- `LETSENCRYPT_EMAIL` - Your email address.
+- `LETSENCRYPT_TEST` - Set to `true` to issue a certificate for a test domain.
 
-Помимо этого, в вашем контейнере требуется использовать сеть, в которой крутиться прокси (в данном случае `proxy`).
+Additionally, your container must use the same network as the proxy (in this case, proxy).
 
-Пример:
+Example:
 
 ```yml
 version: '3'
@@ -46,4 +46,4 @@ networks:
 ```
 
 
-После этого вы автоматически получите сертификаты, которые так же будут обновляться автоматически.
+Once configured, you will automatically receive SSL certificates, which will also be renewed automatically.
